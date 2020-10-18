@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
-import { Beer } from './beer.model';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Beer, BeerDocument } from './schema/beer.schema';
 
 @Injectable()
 export class BeerService {
-  constructor(
-    @InjectRepository(Beer) private repo: Repository<Beer>
-  ) { }
+  constructor(@InjectModel(Beer.name) private model: Model<BeerDocument>) { }
 
-  async findAll(skip?: number): Promise<Beer[]> {
-    return this.repo.find({ take: 20, skip })
+  async findAll(skip: number): Promise<Beer[]> {
+    return await this.model
+      .find()
+      .limit(20)
+      .skip(skip)
+      .exec();
   }
 }

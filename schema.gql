@@ -10,15 +10,14 @@ type Beer {
   city: String!
   state: String!
   country: String!
-  image: String!
   imageUrl: String!
 }
 
-type BeersResponse {
+type BeersResponseDTO {
   collection: [Beer!]!
   finished: Boolean!
 }
 
 type Query {
-  beers(skip: Int): BeersResponse!
+  beers(skip: Int = 0): BeersResponseDTO!
 }
