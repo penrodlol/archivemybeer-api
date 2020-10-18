@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
 
 import { S3Service } from '../aws/s3.service';
-import { Beer } from './beer.model';
 import { BeerResolver } from './beer.resolver';
+import { Beer, BeerSchema } from './schema/beer.schema';
 import { BeerService } from './beer.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Beer]),
-  ],
+  imports: [MongooseModule.forFeature([{ name: Beer.name, schema: BeerSchema }])],
   providers: [
     BeerService,
     BeerResolver,

@@ -1,7 +1,7 @@
 import { GraphQLScalarType } from "graphql";
-import { ReadStream } from "typeorm/platform/PlatformTools";
 import { GraphQLUpload } from "apollo-server-express";
 import { Field, ObjectType } from "@nestjs/graphql";
+import { ReadStream } from "fs";
 
 @ObjectType()
 export class Upload {
