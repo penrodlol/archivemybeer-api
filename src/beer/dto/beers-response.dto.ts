@@ -1,8 +1,8 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import { Beer } from "../schema/beer.schema";
+import { BeersCollectionDTO } from "./beers-collection.dto";
 
 @ObjectType()
 export class BeersResponseDTO {
-  @Field(() => [Beer]) readonly collection: Beer[];
+  @Field(() => [BeersCollectionDTO]) readonly collection: BeersCollectionDTO[];
   @Field() readonly finished: boolean;
 }

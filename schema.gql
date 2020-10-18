@@ -2,7 +2,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Beer {
+type BeersCollectionDTO {
   _id: ID!
   name: String!
   brewer: String!
@@ -14,7 +14,7 @@ type Beer {
 }
 
 type BeersResponseDTO {
-  collection: [Beer!]!
+  collection: [BeersCollectionDTO!]!
   finished: Boolean!
 }
 
