@@ -11,6 +11,7 @@ export class BeerService {
   async findAll(dto: BeersInputDTO): Promise<Beer[]> {
     return this.model
       .find()
+      .sort({ updated: dto.sortOrder })
       .skip(dto.skip)
       .where(dto.search ? { $text: { $search: dto.search } } : {})
       .limit(20)

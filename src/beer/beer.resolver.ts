@@ -1,4 +1,3 @@
-
 import { Args, Query, Resolver } from "@nestjs/graphql";
 import { S3Service } from "../aws/s3.service";
 
@@ -18,8 +17,8 @@ export class BeerResolver {
     @Args('beersInput', {
       type: () => BeersInputDTO,
       nullable: true,
-      defaultValue: { skip: 0, search: null }}
-    ) dto: BeersInputDTO
+      defaultValue: { skip: 0, search: null, sortOrder: 'desc' }
+    }) dto: BeersInputDTO
   ) {
     const collection = await this.beerService
       .findAll(dto)

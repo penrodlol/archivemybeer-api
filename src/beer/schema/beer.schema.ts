@@ -16,7 +16,7 @@ const fields = {
 
 export type BeerDocument = Beer & Document;
 
-@Schema()
+@Schema({ timestamps: { updatedAt: 'updated', createdAt: false } })
 @ObjectType()
 export class Beer {
   @Field(() => ID, fields) _id: ObjectID;
@@ -27,6 +27,7 @@ export class Beer {
   @Prop(props) @Field(fields) state: string;
   @Prop(props) @Field(fields) country: string;
   @Prop(props) @Field(fields) image: string;
+  @Field(fields) updated: Date;
   @Field(fields) imageUrl: string;
 }
 
