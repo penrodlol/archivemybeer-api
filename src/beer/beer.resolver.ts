@@ -1,8 +1,9 @@
 
-import { Args, Int, Query, Resolver } from "@nestjs/graphql";
+import { Args, Query, Resolver } from "@nestjs/graphql";
 import { S3Service } from "../aws/s3.service";
 
 import { BeerService } from "./beer.service";
+import { BeersInputDTO } from "./dto/beers-input.dto";
 import { BeersResponseDTO } from "./dto/beers-response.dto";
 
 @Resolver()
@@ -14,9 +15,20 @@ export class BeerResolver {
 
   @Query(() => BeersResponseDTO, { name: 'beers' })
   async getBeers(
-    @Args('skip', { type: () => Int, defaultValue: 0, nullable: true }) skip: number
+    @Args('beersInput', {
+      type: () => BeersInputDTO,
+      nullable: true,
+      defaultValue: { skip: 0, search: null }}
+    ) dto: BeersInputDTO
   ) {
-    const collection = await this.beerService.findAll(skip);
+    const collection = await this.beerService
+      .findAll(dto)
+      .then(beers => beers.map(beer => {
+        beer.imageUrl = this.s3Service.url(beer.image);
+        return beer;
+      }))
+      .catch(); // TBD
+
     const finished = collection.length < 20;
 
     return { collection, finished };

@@ -9,9 +9,7 @@ import { BeerModule } from './beer/beer.module';
 @Module({
   imports: [
     BeerModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
+    ConfigModule.forRoot({ isGlobal: true }),
     GraphQLModule.forRoot({      
       autoSchemaFile: 'schema.gql', 
       path: '/archivemybeer'
