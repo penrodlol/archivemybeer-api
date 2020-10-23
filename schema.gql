@@ -26,7 +26,7 @@ type BeersResponseDTO {
 }
 
 type Query {
-  beers(beersInput: BeersInputDTO = {skip: 0, search: null, sortOrder: "desc"}): BeersResponseDTO!
+  beers(beersInput: BeersInputDTO): BeersResponseDTO!
 }
 
 input BeersInputDTO {

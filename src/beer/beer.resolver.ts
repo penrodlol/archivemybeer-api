@@ -17,7 +17,6 @@ export class BeerResolver {
     @Args('beersInput', {
       type: () => BeersInputDTO,
       nullable: true,
-      defaultValue: { skip: 0, search: null, sortOrder: 'desc' }
     }) dto: BeersInputDTO
   ) {
     const collection = await this.beerService
