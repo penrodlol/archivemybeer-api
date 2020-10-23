@@ -7,17 +7,17 @@ export class BeersInputDTO {
   @IsOptional()
   @IsInt()
   @Min(0)
-  skip: number;
+  readonly skip: number;
 
   @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @Length(1, 200, { message: 'Requested search is too short or long.' })
-  search: string;
+  readonly search: string;
 
   @Field({ nullable: true })
   @IsOptional()
   @IsString()
   @IsIn(['asc', 'desc'], { message: 'Sort Order direction is invalid.' })
-  sortOrder: string;
+  readonly sortOrder: string;
 }
