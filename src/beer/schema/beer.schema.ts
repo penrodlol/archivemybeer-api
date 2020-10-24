@@ -21,65 +21,65 @@ export type BeerDocument = Beer & Document;
 @ObjectType()
 export class Beer {
   @Field(() => ID, fields)
-  @IsNotEmpty({ message: 'Identifier cannot be empty.' })
+  @IsNotEmpty()
   @IsMongoId()
   _id: ObjectID;
   
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'Name cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
-  @Length(1, 200, { message: 'Name is too short or long.' })
+  @Length(1, 200)
   name: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'Brewer cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
-  @Length(1, 200, { message: 'Brewer is too short or long.' })
+  @Length(1, 200)
   brewer: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'Style cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
-  @Length(1, 200, { message: 'Style is too short or long.' })
+  @Length(1, 200)
   style: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'City cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
-  @Length(1, 200, { message: 'City is too short or long.' })
+  @Length(1, 200)
   city: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'State cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
-  @Length(1, 200, { message: 'State is too short or long.' })
+  @Length(1, 200)
   state: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'Country cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
-  @Length(1, 200, { message: 'Country is too short or long.' })
+  @Length(1, 200)
   country: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty({ message: 'Image cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
   image: string;
 
   @Field(fields)
-  @IsNotEmpty({ message: 'Updated cannot be empty.' })
+  @IsNotEmpty()
   @IsDate()
   updated: Date;
 
   @Field(fields)
-  @IsNotEmpty({ message: 'Image URL cannot be empty.' })
+  @IsNotEmpty()
   @IsString()
   imageUrl: string;
 }
