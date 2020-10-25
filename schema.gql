@@ -34,3 +34,18 @@ input BeersInputDTO {
   search: String
   sortOrder: String
 }
+
+type Mutation {
+  updateBeer(beerInput: BeerInputDTO!): Beer!
+}
+
+input BeerInputDTO {
+  _id: ID
+  name: String
+  brewer: String
+  style: String
+  city: String
+  state: String
+  country: String
+  image: String
+}

@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
+import { ObjectID } from 'mongodb';
 import { Model } from 'mongoose';
+import { trimEntity } from '../utils';
+import { BeerInputDTO } from './dto/beer-input.dto';
 import { BeersInputDTO } from './dto/beers-input.dto';
 import { Beer, BeerDocument } from './schema/beer.schema';
 
@@ -15,6 +18,20 @@ export class BeerService {
       .skip(dto?.skip ? dto.skip : 0)
       .where(dto?.search ? { $text: { $search: dto.search } } : {})
       .limit(20)
+      .exec();
+  }
+
+  async updateOne(dto: BeerInputDTO): Promise<Beer> {
+    const conditions = { _id: new ObjectID(dto._id) };
+    const update = trimEntity(dto, ['_id']);
+    const options = { useFindAndModify: false, new: true }
+
+    return this.model
+      .findOneAndUpdate(
+        conditions,
+        update,
+        options,
+      )
       .exec();
   }
 }

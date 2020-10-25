@@ -1,9 +1,11 @@
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { S3Service } from "../aws/s3.service";
 
 import { BeerService } from "./beer.service";
+import { BeerInputDTO } from "./dto/beer-input.dto";
 import { BeersInputDTO } from "./dto/beers-input.dto";
 import { BeersResponseDTO } from "./dto/beers-response.dto";
+import { Beer } from "./schema/beer.schema";
 
 @Resolver()
 export class BeerResolver {
@@ -30,6 +32,15 @@ export class BeerResolver {
     const finished = collection.length < 20;
 
     return { collection, finished };
+  }
+
+  @Mutation(() => Beer)
+  async updateBeer(
+    @Args('beerInput', {
+      type: () => BeerInputDTO
+    }) dto: BeerInputDTO
+  ) {
+    return this.beerService.updateOne(dto);
   }
 
 }
