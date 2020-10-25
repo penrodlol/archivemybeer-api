@@ -1,6 +1,7 @@
+import { Optional } from '@nestjs/common';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { IsDate, IsMongoId, IsNotEmpty, IsString, Length } from 'class-validator';
+import { IsMongoId, Length } from 'class-validator';
 import { ObjectID } from 'mongodb';
 import { Document } from 'mongoose';
 
@@ -21,66 +22,48 @@ export type BeerDocument = Beer & Document;
 @ObjectType()
 export class Beer {
   @Field(() => ID, fields)
-  @IsNotEmpty()
+  @Optional()
   @IsMongoId()
   _id: ObjectID;
   
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   @Length(1, 200)
   name: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   @Length(1, 200)
   brewer: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   @Length(1, 200)
   style: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   @Length(1, 200)
   city: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   @Length(1, 200)
   state: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   @Length(1, 200)
   country: string;
 
   @Prop(props)
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   image: string;
 
   @Field(fields)
-  @IsNotEmpty()
-  @IsDate()
   updated: Date;
 
   @Field(fields)
-  @IsNotEmpty()
-  @IsString()
   imageUrl: string;
 }
 
