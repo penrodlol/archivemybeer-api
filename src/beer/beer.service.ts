@@ -4,6 +4,7 @@ import { ObjectID } from 'mongodb';
 import { Model } from 'mongoose';
 import { trimEntity } from '../utils';
 import { BeerInputDTO } from './dto/beer-input.dto';
+import { BeerUpdateDTO } from './dto/beer-update.dto';
 import { BeersInputDTO } from './dto/beers-input.dto';
 import { Beer, BeerDocument } from './schema/beer.schema';
 
@@ -21,7 +22,13 @@ export class BeerService {
       .exec();
   }
 
-  async updateOne(dto: BeerInputDTO): Promise<Beer> {
+  async findOne(dto: BeerInputDTO): Promise<Beer> {
+    return this.model
+      .findById(dto._id)
+      .exec();
+  }
+
+  async updateOne(dto: BeerUpdateDTO): Promise<Beer> {
     const conditions = { _id: new ObjectID(dto._id) };
     const update = trimEntity(dto, ['_id']);
     const options = { useFindAndModify: false, new: true }

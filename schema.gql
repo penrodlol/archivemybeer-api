@@ -26,7 +26,8 @@ type BeersResponseDTO {
 }
 
 type Query {
-  beers(beersInput: BeersInputDTO): BeersResponseDTO!
+  beers(input: BeersInputDTO): BeersResponseDTO!
+  beer(input: BeerInputDTO!): Beer!
 }
 
 input BeersInputDTO {
@@ -35,11 +36,15 @@ input BeersInputDTO {
   sortOrder: String
 }
 
-type Mutation {
-  updateBeer(beerInput: BeerInputDTO!): Beer!
+input BeerInputDTO {
+  _id: ID
 }
 
-input BeerInputDTO {
+type Mutation {
+  updateBeer(update: BeerUpdateDTO!): Beer!
+}
+
+input BeerUpdateDTO {
   _id: ID
   name: String
   brewer: String
